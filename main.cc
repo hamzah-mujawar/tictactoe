@@ -53,19 +53,61 @@ char makeTurn(char gameBoard[Gameparams::boardSize][Gameparams::boardSize], char
 	int placeCol {};
 	
 	std::cout << "Where do you want to place " << currentPlayer << "?" << '\n';
-	
+
+	/*
+	 * We need to getRows and getCols at least once that's why we use a do while
+	 * If the user tries to enter a row/column that's full it will loop back
+	 */
 	do{
 		placeRow = getRows();
 		placeCol = getCols();
-		if(gameBoard[placeCol][placeRow] != ' ')
+		if(gameBoard[placeRow][placeCol] != ' ')
 			std::cout << "This cells is occupied try again" << '\n';
-	}while(gameBoard[placeCol][placeRow] != ' ');
+	}while(gameBoard[placeRow][placeCol] != ' ');
 
-	gameBoard[placeCol][placeRow] = currentPlayer;
+	gameBoard[placeRow][placeCol] = currentPlayer; // place the X/O 
 
-	currentPlayer = playerTurn(currentPlayer);
+	currentPlayer = playerTurn(currentPlayer); // swap the current player
 
-	return currentPlayer;
+	return currentPlayer;  
+}
+
+
+bool checkRows(char gameBoard[Gameparams::boardSize][Gameparams::boardSize], char player){
+	for(int i = 0; i < Gameparams::boardSize; i++){
+		if(gameBoard[i][0] == player && 
+				gameBoard[i][1] == player &&
+				gameBoard[i][2] == player)
+			return true;
+	}
+	return false;
+}
+
+bool checkCols(char gameBoard[Gameparams::boardSize][Gameparams::boardSize], char player){
+	for(int i = 0; i < Gameparams::boardSize; i++){
+		if(gameBoard[0][i] == player &&
+				gameBoard[1][i] == player &&
+				gameBoard[2][i] == player)
+			return true;
+	}
+	return false;
+}
+
+bool checkDiags(char gameBoard[Gameparams::boardSize][Gameparams::boardSize], char player){
+	if(gameBoard[0][0] == player &&
+			gameBoard[1][1] == player &&
+			gameBoard[2][2] == player)
+		return true;
+	else if(gameBoard[2][0] == player &&
+			gameBoard[1][1] == player &&
+			gameBoard[0][2] == player)
+		return true;
+	return false;
+}
+
+
+bool checkWin(char gameBoard[Gameparams::boardSize][Gameparams::boardSize], char player){
+	return (checkRows(gameBoard, player) || checkCols(gameBoard, player) || checkDiags(gameBoard, player));
 }
 
 int main() {
@@ -77,19 +119,20 @@ int main() {
 	};
 
 	char currentPlayer { Gameparams::player1 }; // setting player 1 to be X (game starts with X)
+	
+	bool checkWinner = checkWin(gameBoard, currentPlayer);
 
-		
-	currentPlayer = makeTurn(gameBoard, currentPlayer);
-	displayBoard(gameBoard);
-	currentPlayer = makeTurn(gameBoard, currentPlayer);
-	displayBoard(gameBoard);
-  // TODO find a way to update the board with a turn
+	while(!checkWinner){		
+		char playerBeforeTurn { currentPlayer }; // save prev player
+		currentPlayer = makeTurn(gameBoard, currentPlayer); // this function returns the next player
+		displayBoard(gameBoard);
+		checkWinner = checkWin(gameBoard, playerBeforeTurn);
+		if(checkWinner)
+			std::cout << "Player " << playerBeforeTurn << " wins\n";
 
-  // TODO find a way to handle turns
-
-  // TODO handle logic of who won the game, handle draws
+	}
   
-  // TODO Ask player if they want to play another round
+  // TODO Ask player if they want to play another round and handle draws
   
 	return 0;
 }

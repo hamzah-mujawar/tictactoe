@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-void Board::displayBoard()
+void Board::displayBoard() const
 {
     for (const auto& row : m_board)
     {
@@ -12,4 +12,9 @@ void Board::displayBoard()
         }
         std::cout << '\n';
     }
+}
+
+bool Board::isCellEmpty(std::size_t row, std::size_t column)
+{
+    return m_board[row][column] == 0;
 }

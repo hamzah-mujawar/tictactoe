@@ -19,6 +19,7 @@ public:
     void displayBoard() const;
     bool isCellEmpty(std::size_t row, std::size_t column);
     void setSymbol(std::size_t row, std::size_t column, Symbol& symbol);
+    std::vector<std::vector<int>> moves();
 
 private:
     // rows and columns are equal

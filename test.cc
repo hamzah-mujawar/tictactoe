@@ -1,10 +1,11 @@
 #include "Board.h"
-#include <ios>
+#include "Player.h"
 #include <iostream>
 
 int main()
 {
-    Board board{};
-    board.displayBoard();
-    std::cout << std::boolalpha << board.isCellEmpty(0, 0);
+
+    Player player1{'X'};
+
+    return 0;
 }

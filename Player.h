@@ -1,11 +1,14 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "Symbol.h"
+
 class Player
 {
 public:
-    // constructing a Player with a symbol either X or O
-    Player(char symbol);
+    Player(const Symbol& symbol);
+
+    const char& getPlayer() const;
 
 private:
     char m_player{};

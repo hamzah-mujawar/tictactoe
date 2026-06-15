@@ -4,6 +4,8 @@
 #include <cstddef>
 #include <vector>
 
+#include "Symbol.h"
+
 class Board
 {
 public:
@@ -16,6 +18,7 @@ public:
 
     void displayBoard() const;
     bool isCellEmpty(std::size_t row, std::size_t column);
+    void setSymbol(std::size_t row, std::size_t column, Symbol& symbol);
 
 private:
     // rows and columns are equal

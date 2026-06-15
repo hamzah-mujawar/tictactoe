@@ -8,7 +8,9 @@ class Game
 {
 public:
 private:
-    Board m_board{};
+    Board board{};
+    Player player1{Symbol{'X'}};
+    Player player2{Symbol{'O'}};
 };
 
 #endif

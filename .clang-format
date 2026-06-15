@@ -1,0 +1,10 @@
+BasedOnStyle: LLVM
+IndentWidth: 4
+TabWidth: 4
+AccessModifierOffset: -4
+BreakBeforeBraces: Allman
+SpacesInContainerLiterals: true 
+PointerAlignment: Left 
+BreakTemplateDeclarations: Yes
+ReflowComments: false
+NamespaceIndentation: All

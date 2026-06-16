@@ -19,4 +19,7 @@ private:
     Player* m_currentPlayer{&m_player1};
 };
 
+std::size_t getUserRow();
+std::size_t getUserCol();
+
 #endif

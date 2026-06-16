@@ -18,12 +18,39 @@ void Game::makeTurn(std::size_t x, std::size_t y)
     }
 }
 
+std::size_t getUserRow()
+{
+    std::size_t row{};
+
+    std::cout << "Row No: ";
+    std::cin >> row;
+    while (row > 2 || row < 0)
+    {
+        std::cout << "Please enter a value between 0 and 2" << '\n';
+        std::cin >> row;
+    }
+    return row;
+}
+
+std::size_t getUserCols()
+{
+    std::size_t col{};
+
+    std::cout << "Column No: ";
+    std::cin >> col;
+    while (col > 2 || col < 0)
+    {
+        std::cout << "Please enter a value between 0 and 2" << '\n';
+        std::cin >> col;
+    }
+
+    return col;
+}
+
 void Game::run()
 {
-    std::size_t x{};
-    std::size_t y{};
-
-    std::cin >> x >> y;
+    std::size_t x{getUserRow()};
+    std::size_t y{getUserCols()};
 
     makeTurn(x, y);
 }

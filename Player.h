@@ -7,7 +7,6 @@ class Player
 {
 public:
     Player(const Symbol& symbol);
-
     const Symbol& getPlayer() const;
 
 private:

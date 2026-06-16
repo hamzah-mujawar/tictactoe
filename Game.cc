@@ -49,8 +49,13 @@ std::size_t getUserCols()
 
 void Game::run()
 {
-    std::size_t x{getUserRow()};
-    std::size_t y{getUserCols()};
+    while (m_board.isFull())
+    {
+        std::size_t x{getUserRow()};
+        std::size_t y{getUserCols()};
 
-    makeTurn(x, y);
+        makeTurn(x, y);
+        m_board.displayBoard();
+    }
+    std::cout << "Draw!" << '\n';
 }

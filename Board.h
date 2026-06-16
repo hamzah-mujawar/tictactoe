@@ -20,6 +20,7 @@ public:
     bool isCellEmpty(std::size_t row, std::size_t column);
     void setSymbol(std::size_t row, std::size_t column, const Symbol& symbol);
     std::vector<std::vector<int>> occupiedCells();
+    bool isFull();
 
 private:
     // rows and columns are equal

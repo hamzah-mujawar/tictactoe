@@ -26,6 +26,22 @@ void Board::setSymbol(std::size_t row, std::size_t column, const Symbol& symbol)
     m_board[row][column] = symbol.getSymbol();
 }
 
+bool Board::isFull()
+{
+    bool is_empty{false};
+    for (std::size_t i{0}; i < m_board.size(); ++i)
+    {
+        for (std::size_t j{0}; j < m_board.size(); ++j)
+        {
+            if (isCellEmpty(i, j))
+                is_empty = true;
+            else
+                is_empty = false;
+        }
+    }
+    return is_empty;
+}
+
 std::vector<std::vector<int>> Board::occupiedCells()
 {
     std::vector<std::vector<int>> boardState{};

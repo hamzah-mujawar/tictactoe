@@ -21,19 +21,20 @@ bool Board::isCellEmpty(std::size_t row, std::size_t column)
     return m_board[row][column] == 0;
 }
 
-void Board::setSymbol(std::size_t row, std::size_t column, Symbol& symbol)
+void Board::setSymbol(std::size_t row, std::size_t column, const Symbol& symbol)
 {
     m_board[row][column] = symbol.getSymbol();
 }
 
-std::vector<std::vector<int>> Board::moves()
+std::vector<std::vector<int>> Board::occupiedCells()
 {
-    std::vector<std::vector<int>> boardState;
-    for (int i{0}; i < m_board.size(); ++i)
-        for (int j{0}; j < m_board[0].size(); ++j)
+    std::vector<std::vector<int>> boardState{};
+    for (std::size_t i{0}; i < m_board.size(); ++i)
+        for (std::size_t j{0}; j < m_board[0].size(); ++j)
         {
-            if (m_board[i][j] == 'X' || m_board[i][j] == 'O')
-                boardState.push_back({i, j});
+            if (!isCellEmpty(i, j))
+                boardState.push_back(
+                    {static_cast<int>(i), static_cast<int>(j)});
         }
     return boardState;
 }

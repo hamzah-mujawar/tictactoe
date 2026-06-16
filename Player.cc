@@ -1,5 +1,5 @@
 #include "Player.h"
 
-Player::Player(const Symbol& symbol) : m_player{symbol.getSymbol()} {}
+Player::Player(const Symbol& symbol) : m_player{symbol} {}
 
-const char& Player::getPlayer() const { return m_player; }
+const Symbol& Player::getPlayer() const { return m_player; }

@@ -8,10 +8,10 @@ class Player
 public:
     Player(const Symbol& symbol);
 
-    const char& getPlayer() const;
+    const Symbol& getPlayer() const;
 
 private:
-    char m_player{};
+    Symbol m_player;
 };
 
 #endif

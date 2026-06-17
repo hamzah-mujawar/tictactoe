@@ -17,10 +17,15 @@ public:
     Board& operator=(Board&& board) = delete;
 
     void displayBoard() const;
-    bool isCellEmpty(std::size_t row, std::size_t column);
+    bool isCellFull(std::size_t row, std::size_t column);
     void setSymbol(std::size_t row, std::size_t column, const Symbol& symbol);
     std::vector<std::vector<int>> occupiedCells();
-    bool isFull();
+    bool hasSpace();
+
+    bool checkCols(char symbol) const;
+    bool checkRows(char symbol) const;
+    bool checkDiags(char symbol) const;
+    bool checkWin(char symbol) const;
 
 private:
     // rows and columns are equal

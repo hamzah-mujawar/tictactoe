@@ -10,15 +10,15 @@ void Board::displayBoard() const
     {
         for (const auto& elem : row)
         {
-            std::cout << elem << " ";
+            std::cout << " " << elem << " ";
         }
         std::cout << '\n';
     }
 }
 
-bool Board::isCellEmpty(std::size_t row, std::size_t column)
+bool Board::isCellFull(std::size_t row, std::size_t column)
 {
-    return m_board[row][column] == 0;
+    return (m_board[row][column] != 0);
 }
 
 void Board::setSymbol(std::size_t row, std::size_t column, const Symbol& symbol)
@@ -26,31 +26,81 @@ void Board::setSymbol(std::size_t row, std::size_t column, const Symbol& symbol)
     m_board[row][column] = symbol.getSymbol();
 }
 
-bool Board::isFull()
+bool Board::hasSpace()
 {
-    bool is_empty{false};
+    // hard coded player X and player O values here
+    char playerX{'X'};
+    char playerO{'O'};
+
+    int count{0};
+
+    // we check the rows and columns for any X and Os if they
+    // amount to 9 that means the board is full and we return false
     for (std::size_t i{0}; i < m_board.size(); ++i)
     {
-        for (std::size_t j{0}; j < m_board.size(); ++j)
+        for (std::size_t j{0}; j < m_board[0].size(); ++j)
         {
-            if (isCellEmpty(i, j))
-                is_empty = true;
-            else
-                is_empty = false;
+            if (m_board[i][j] == playerX || m_board[i][j] == playerO)
+            {
+                ++count; // incrementing count for any X or O's found
+            }
         }
     }
-    return is_empty;
+    if (count == 9)
+    {
+        return false;
+    }
+    return true;
 }
 
+// This function returns a 2d vector of all the moves the players have done
 std::vector<std::vector<int>> Board::occupiedCells()
 {
     std::vector<std::vector<int>> boardState{};
     for (std::size_t i{0}; i < m_board.size(); ++i)
         for (std::size_t j{0}; j < m_board[0].size(); ++j)
         {
-            if (!isCellEmpty(i, j))
+            if (isCellFull(i, j))
                 boardState.push_back(
                     {static_cast<int>(i), static_cast<int>(j)});
         }
     return boardState;
+}
+
+bool Board::checkRows(char symbol) const
+{
+    for (int i = 0; i < m_board.size(); ++i)
+    {
+        if (m_board[i][0] == symbol && m_board[i][1] == symbol &&
+            m_board[i][2] == symbol)
+            return true;
+    }
+    return false;
+}
+
+bool Board::checkCols(char symbol) const
+{
+    for (int i = 0; i < m_board.size(); ++i)
+    {
+        if (m_board[0][i] == symbol && m_board[1][i] == symbol &&
+            m_board[2][i] == symbol)
+            return true;
+    }
+    return false;
+}
+
+bool Board::checkDiags(char symbol) const
+{
+    if (m_board[0][0] == symbol && m_board[1][1] == symbol &&
+        m_board[2][2] == symbol)
+        return true;
+    else if (m_board[2][0] == symbol && m_board[1][1] == symbol &&
+             m_board[0][2] == symbol)
+        return true;
+    return false;
+}
+
+bool Board::checkWin(char symbol) const
+{
+    return (checkRows(symbol) || checkCols(symbol) || checkDiags(symbol));
 }

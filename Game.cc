@@ -11,10 +11,16 @@ void Game::switchCurrPlayer(const Player* currPlayer)
 // Function used to handle a turn on the board
 void Game::makeTurn(std::size_t x, std::size_t y)
 {
-    if (m_board.isCellEmpty(x, y))
+    if (!m_board.isCellFull(x, y))
     {
         m_board.setSymbol(x, y, m_currentPlayer->getPlayer());
-        switchCurrPlayer(m_currentPlayer); // switch player after move
+    }
+    else
+    {
+        std::cout << "This cell is occupied, try again\n";
+        // switch the current player back to this player
+        // so they may input again
+        switchCurrPlayer(m_currentPlayer);
     }
 }
 
@@ -49,13 +55,23 @@ std::size_t getUserCols()
 
 void Game::run()
 {
-    while (m_board.isFull())
+    while (m_board.hasSpace())
     {
         std::size_t x{getUserRow()};
         std::size_t y{getUserCols()};
 
         makeTurn(x, y);
+        char currentPlayerChar = m_currentPlayer->getPlayer().getSymbol();
+
         m_board.displayBoard();
+
+        if (m_board.checkWin(currentPlayerChar))
+        {
+            std::cout << currentPlayerChar << " wins!" << '\n';
+            return;
+        }
+
+        switchCurrPlayer(m_currentPlayer);
     }
     std::cout << "Draw!" << '\n';
 }

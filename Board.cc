@@ -6,14 +6,19 @@
 
 void Board::displayBoard() const
 {
-    for (const auto& row : m_board)
+    std::cout << '\n';
+    for (int i{0}; i < 3; ++i)
     {
-        for (const auto& elem : row)
+        if (i != 0)
+            std::cout << "\n  ----------------------------------------------\n";
+        for (int j{0}; j < 3; ++j)
         {
-            std::cout << " " << elem << " ";
+            std::cout << "\t" << m_board[i][j];
+            if (j != 2)
+                std::cout << "\t|";
         }
-        std::cout << '\n';
     }
+    std::cout << '\n';
 }
 
 bool Board::isCellFull(std::size_t row, std::size_t column)

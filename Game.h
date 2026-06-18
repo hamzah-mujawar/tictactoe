@@ -5,12 +5,22 @@
 #include "Player.h"
 #include "Symbol.h"
 
+#include <utility>
+
 class Game
 {
 public:
     void switchCurrPlayer(const Player* currPlayer);
     void makeTurn(std::size_t x, std::size_t y);
-    void run();
+    void playerWithComputer();
+    void playerWithHuman();
+
+    // minmax algorithm functions
+    // Adapted from https://www.geeksforgeeks.org/dsa/finding-optimal-move-in-tic-tac-toe-using-minimax-algorithm-in-game-theory/
+    int evaluate();
+    int minimax(int depth, bool isMax);
+    std::pair<int, int> findBestMove();
+    void opponentMove();
 
 private:
     Board m_board{};

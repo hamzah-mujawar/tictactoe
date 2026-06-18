@@ -109,3 +109,9 @@ bool Board::checkWin(char symbol) const
 {
     return (checkRows(symbol) || checkCols(symbol) || checkDiags(symbol));
 }
+
+// overloaded parethesis operator (member function)
+char& Board::operator()(std::size_t row, std::size_t col)
+{
+    return m_board[row][col];
+}

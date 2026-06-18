@@ -27,6 +27,8 @@ public:
     bool checkDiags(char symbol) const;
     bool checkWin(char symbol) const;
 
+    char& operator()(std::size_t row, std::size_t col);
+
 private:
     // rows and columns are equal
     const std::size_t m_boardSize{3};

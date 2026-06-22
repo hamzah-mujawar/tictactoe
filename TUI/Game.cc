@@ -102,6 +102,7 @@ int Game::evaluate()
     return 0;
 }
 
+// https://www.geeksforgeeks.org/dsa/finding-optimal-move-in-tic-tac-toe-using-minimax-algorithm-in-game-theory/
 int Game::minimax(int depth, bool isMax)
 {
     int score{evaluate()};
@@ -185,6 +186,8 @@ std::pair<int, int> Game::findBestMove()
     return bestMove;
 }
 
+// using the result from minmax algorithm
+// play opponent move
 void Game::opponentMove()
 {
     std::pair<int, int> bestMove{findBestMove()};

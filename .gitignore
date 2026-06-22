@@ -1,2 +1,5 @@
 .ccls-cache
-main
+**/build 
+**/.build
+**/.direnv 
+**/.cache

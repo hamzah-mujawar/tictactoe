@@ -10,14 +10,14 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 
 qt_add_executable(tictactoe-gui
-    main.cpp
+    main.cc
 )
 
 qt_add_qml_module(tictactoe-gui
     URI TicTacToe
     VERSION 1.0
     QML_FILES Main.qml 
-    SOURCES
+    SOURCES Game.cc Game.h Board.cc Board.h Player.cc Player.h Symbol.cc Symbol.h
 )
 
 set_target_properties(tictactoe-gui PROPERTIES

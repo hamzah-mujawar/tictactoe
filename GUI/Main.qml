@@ -14,55 +14,68 @@ Window {
     Game {
         id: game
     }
-    Text {
-        anchors.top: parent.top
-        anchors.topMargin: 20
-        anchors.horizontalCenter: parent.horizontalCenter
 
-        text: game.status
-        font.pixelSize: 24
-    }
-    RowLayout {
-        anchors.centerIn: parent 
-        spacing: 5 
+    StackLayout {
+        id: stack 
+        anchors.fill: parent 
+        currentIndex: 0
+        Item {
+            Column {
+                anchors.centerIn: parent 
+                spacing: 20 
 
-        GroupBox {
-            GridLayout {
-                columns: 3
-                columnSpacing: 5
-                rowSpacing: 5
+                Text {
+                    text: "Choose mode"
+                    font.pixelSize: 28 
+                }
+                Button {
+                    text: "Player vs Player"
+                    onClicked: {
+                        stack.currentIndex = 1
+                    }
+                }
+            }
+        }
+        Item {
+            Column {
+                anchors.centerIn: parent 
+                spacing: 20 
 
-                Repeater { 
-                    model: 9
-                    Rectangle {
-                        width: 100
-                        height: 100 
-                        border.color: "#333"
-                        border.width: 2
+                Text {
+                    text: game.status 
+                    font.pixelSize: 24
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+                RowLayout {
+                    GroupBox {
+                        GridLayout {
+                            columns: 3 
+                            Repeater {
+                                model: 9
 
-                        property string cellValue: game.board[index]
+                                Rectangle {
+                                    width: 100
+                                    height: 100 
+                                    border.width: 2
 
-                        Text {
-                            anchors.centerIn: parent 
-                            font.pixelSize: 48 
-                            text: parent.cellValue 
-                        }
+                                    property string cellValue: game.board[index]
 
-                        Connections {
-                            target: game 
-                            function onBoardChanged() {
-                                cellValue = game.board[index]
-                            }
-                        }
+                                    Text {
+                                        anchors.centerIn: parent 
+                                        text: parent.cellValue 
+                                        font.pixelSize: 48 
+                                    }
 
-                        MouseArea {
-                            anchors.fill: parent 
-                            onClicked: {
-                                var row = Math.floor(index/3)
-                                var col = index % 3 
-                                if(parent.cellValue === "")
-                                {
-                                    game.cellClicked(row, col)
+                                    MouseArea {
+                                        anchors.fill: parent 
+                                        onClicked: {
+                                            var row = Math.floor(index / 3)
+                                            var col = index % 3 
+                                            if(parent.cellValue === ""){
+                                                game.cellClicked(row, col)
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }

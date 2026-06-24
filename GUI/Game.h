@@ -36,6 +36,7 @@ signals:
 
 private:
     QString m_status{};
+    bool m_gameOver{false};
 };
 
 #endif

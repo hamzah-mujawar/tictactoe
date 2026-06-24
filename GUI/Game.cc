@@ -35,9 +35,13 @@ void Game::cellClicked(int row, int col)
     makeTurn(row, col);
     char currentPlayerChar = m_currentPlayer->getPlayer().getSymbol();
 
+    if (m_gameOver)
+        return;
+
     if (m_board.checkWin(currentPlayerChar))
     {
         m_status = QString(currentPlayerChar) + " wins!";
+        m_gameOver = true;
         emit boardChanged();
         emit statusChanged();
         return;
@@ -45,6 +49,7 @@ void Game::cellClicked(int row, int col)
     if (!m_board.hasSpace())
     {
         m_status = "Draw";
+        m_gameOver = true;
         emit boardChanged();
         emit statusChanged();
         return;

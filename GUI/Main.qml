@@ -25,23 +25,31 @@ Window {
                 spacing: 20 
 
                 Text {
+                    text: "Tic Tac Toe"
+                    x: 25
+                    font.pixelSize: 40
+                }
+                Text {
                     text: "Choose game mode"
                     font.pixelSize: 28 
                 }
-                Button {
-                    text: "Player vs Player"
-                    x: 75
-                    onClicked: {
-                        stack.currentIndex = 1
-                        game.resetBoard()
+                Row {
+                    spacing: 50
+                    Button {
+                        text: "Player vs Player"
+                        x: 75
+                        onClicked: {
+                            stack.currentIndex = 1
+                            game.resetBoard()
+                        }
                     }
-                }
-                Button {
-                    text: "Player vs AI"
-                    x: 75
-                    onClicked: {
-                        stack.currentIndex = 2
-                        game.resetBoard()
+                    Button {
+                        text: "Player vs AI"
+                        x: 75
+                        onClicked: {
+                            stack.currentIndex = 2
+                            game.resetBoard()
+                        }
                     }
                 }
             }

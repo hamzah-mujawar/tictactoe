@@ -250,6 +250,8 @@ void Game::resetBoard()
 {
     m_currentPlayer->setPlayer('X');
     m_gameOver = false;
+    m_status = {};
+
     for (int i{0}; i < 3; ++i)
     {
         for (int j{0}; j < 3; ++j)
@@ -258,4 +260,5 @@ void Game::resetBoard()
         }
     }
     emit boardChanged();
+    emit statusChanged();
 }

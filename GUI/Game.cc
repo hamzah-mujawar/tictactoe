@@ -10,9 +10,10 @@ void Game::makeTurn(std::size_t row, std::size_t col)
     m_board.setSymbol(row, col, m_currentPlayer->getPlayer());
 }
 
-void Game::switchCurrPlayer(const Player* currPlayer)
+void Game::switchCurrPlayer()
 {
-    m_currentPlayer = ((currPlayer == &m_player1) ? &m_player2 : &m_player1);
+    m_currentPlayer =
+        ((m_currentPlayer == &m_player1) ? &m_player2 : &m_player1);
 }
 
 QString Game::status() const { return m_status; }
@@ -56,7 +57,8 @@ void Game::cellClickedVsHuman(int row, int col)
         return;
     }
 
-    switchCurrPlayer(m_currentPlayer);
+    switchCurrPlayer();
+
     emit boardChanged();
 }
 
@@ -224,7 +226,7 @@ void Game::cellClickedVsAI(int row, int col)
         return;
     }
 
-    switchCurrPlayer(m_currentPlayer);
+    switchCurrPlayer();
 
     // immediately do the opponents move
     opponentMove();
@@ -239,7 +241,7 @@ void Game::cellClickedVsAI(int row, int col)
         return;
     }
 
-    switchCurrPlayer(m_currentPlayer);
+    switchCurrPlayer();
 
     emit boardChanged();
 }

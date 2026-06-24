@@ -34,7 +34,7 @@ public:
 
 private:
     void makeTurn(std::size_t x, std::size_t y);
-    void switchCurrPlayer(const Player* player);
+    void switchCurrPlayer();
 
     Board m_board{};
     Player m_player1{Symbol{'X'}};

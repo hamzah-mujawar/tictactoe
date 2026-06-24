@@ -49,6 +49,12 @@ Window {
                 spacing: 20 
 
                 Text {
+                    text: qsTr("Vs Human")
+                    font.pixelSize: 24
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+
+                Text {
                     text: game.status 
                     font.pixelSize: 24
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -86,6 +92,12 @@ Window {
                                 }
                             }
                         }
+                    }
+                }
+                Button {
+                    text: "Back to Main menu"
+                    onClicked: {
+                        stack.currentIndex = 0
                     }
                 }
             }
@@ -139,6 +151,12 @@ Window {
                                 }
                             }
                         }
+                    }
+                }
+                Button {
+                    text: "Back to Main menu"
+                    onClicked: {
+                        stack.currentIndex = 0
                     }
                 }
             }

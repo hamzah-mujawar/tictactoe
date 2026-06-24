@@ -199,6 +199,7 @@ void Game::opponentMove()
 
 void Game::playerWithComputer()
 {
+    m_board.displayBoard();
     while (m_board.hasSpace())
     {
         char currentPlayerChar = m_currentPlayer->getPlayer().getSymbol();
@@ -230,6 +231,7 @@ void Game::playerWithComputer()
 
 void Game::playerWithHuman()
 {
+    m_board.displayBoard();
     while (m_board.hasSpace())
     {
         std::size_t x{getUserRow()};

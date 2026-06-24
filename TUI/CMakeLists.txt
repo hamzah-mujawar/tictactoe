@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.6)
 
-project(TicTacToeTUI VERSION 0.1 LANGUAGES CXX)
+project(tictactoe-tui VERSION 0.1 LANGUAGES CXX)
 
 
-add_executable(TicTacToeTUI
+add_executable(tictactoe-tui
     main.cc 
     Game.cc 
     Player.cc

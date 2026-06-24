@@ -207,11 +207,9 @@ void Game::cellClickedVsAI(int row, int col)
 
     makeTurn(row, col);
 
-    char currentPlayerChar = m_currentPlayer->getPlayer().getSymbol();
-
-    if (m_board.checkWin(currentPlayerChar))
+    if (m_board.checkWin('X'))
     {
-        m_status = QString(currentPlayerChar) + " wins!";
+        m_status = QString('X') + " wins!";
         m_gameOver = true;
         emit boardChanged();
         emit statusChanged();
@@ -232,9 +230,9 @@ void Game::cellClickedVsAI(int row, int col)
     opponentMove();
 
     // need to check if the AI has won or not
-    if (m_board.checkWin(currentPlayerChar))
+    if (m_board.checkWin('O'))
     {
-        m_status = QString(currentPlayerChar) + " wins!";
+        m_status = QString('O') + " wins!";
         m_gameOver = true;
         emit boardChanged();
         emit statusChanged();

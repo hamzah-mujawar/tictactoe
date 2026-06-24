@@ -25,19 +25,23 @@ Window {
                 spacing: 20 
 
                 Text {
-                    text: "Choose mode"
+                    text: "Choose game mode"
                     font.pixelSize: 28 
                 }
                 Button {
                     text: "Player vs Player"
+                    x: 75
                     onClicked: {
                         stack.currentIndex = 1
+                        game.resetBoard()
                     }
                 }
                 Button {
                     text: "Player vs AI"
+                    x: 75
                     onClicked: {
                         stack.currentIndex = 2
+                        game.resetBoard()
                     }
                 }
             }

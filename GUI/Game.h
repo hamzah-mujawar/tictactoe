@@ -18,6 +18,8 @@ public:
     explicit Game(QObject* parent = nullptr);
     Q_INVOKABLE void cellClickedVsHuman(int row, int col);
     Q_INVOKABLE void cellClickedVsAI(int row, int col);
+    // reset board state
+    Q_INVOKABLE void resetBoard();
 
     QList<QString> board();
 

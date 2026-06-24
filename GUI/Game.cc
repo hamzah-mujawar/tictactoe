@@ -245,3 +245,17 @@ void Game::cellClickedVsAI(int row, int col)
 
     emit boardChanged();
 }
+
+void Game::resetBoard()
+{
+    m_currentPlayer->setPlayer('X');
+    m_gameOver = false;
+    for (int i{0}; i < 3; ++i)
+    {
+        for (int j{0}; j < 3; ++j)
+        {
+            m_board(i, j) = 0;
+        }
+    }
+    emit boardChanged();
+}

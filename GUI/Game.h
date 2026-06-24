@@ -16,10 +16,19 @@ class Game : public QObject
 
 public:
     explicit Game(QObject* parent = nullptr);
-    Q_INVOKABLE void cellClicked(int row, int col);
+    Q_INVOKABLE void cellClickedVsHuman(int row, int col);
+    Q_INVOKABLE void cellClickedVsAI(int row, int col);
+
     QList<QString> board();
 
     QString status() const;
+
+    // minmax algorithm functions
+    // Adapted from https://www.geeksforgeeks.org/dsa/finding-optimal-move-in-tic-tac-toe-using-minimax-algorithm-in-game-theory/
+    int evaluate();
+    int minimax(int depth, bool isMax);
+    std::pair<int, int> findBestMove();
+    void opponentMove();
 
 private:
     void makeTurn(std::size_t x, std::size_t y);

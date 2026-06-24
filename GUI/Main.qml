@@ -34,8 +34,15 @@ Window {
                         stack.currentIndex = 1
                     }
                 }
+                Button {
+                    text: "Player vs AI"
+                    onClicked: {
+                        stack.currentIndex = 2
+                    }
+                }
             }
         }
+
         Item {
             Column {
                 anchors.centerIn: parent 
@@ -72,7 +79,60 @@ Window {
                                             var row = Math.floor(index / 3)
                                             var col = index % 3 
                                             if(parent.cellValue === ""){
-                                                game.cellClicked(row, col)
+                                                game.cellClickedVsHuman(row, col)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        Item {
+            Column {
+                anchors.centerIn: parent 
+                spacing: 20 
+
+                Text {
+                    text: qsTr("Vs AI")
+                    font.pixelSize: 24
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+
+                Text {
+                    text: game.status 
+                    font.pixelSize: 24
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+                RowLayout {
+                    GroupBox {
+                        GridLayout {
+                            columns: 3 
+                            Repeater {
+                                model: 9
+
+                                Rectangle {
+                                    width: 100
+                                    height: 100 
+                                    border.width: 2
+
+                                    property string cellValue: game.board[index]
+
+                                    Text {
+                                        anchors.centerIn: parent 
+                                        text: parent.cellValue 
+                                        font.pixelSize: 48 
+                                    }
+
+                                    MouseArea {
+                                        anchors.fill: parent 
+                                        onClicked: {
+                                            var row = Math.floor(index / 3)
+                                            var col = index % 3 
+                                            if(parent.cellValue === ""){
+                                                game.cellClickedVsAI(row, col)
                                             }
                                         }
                                     }
